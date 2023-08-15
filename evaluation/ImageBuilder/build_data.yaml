@@ -1,0 +1,45 @@
+repo_name: lilbillybiscuit/323tester
+
+global_environment:
+  - "RANDOM_ENV=1"
+
+pre_commands:
+  - name: "Create mamba env"
+    commands:
+      - mamba create -n test python=3.6 -y
+      - mamba init sh
+      - mamba init bash
+
+  - name: "Download requirements"
+    commands:
+      - wget https://gersteincodegenprod.s3.amazonaws.com/general/requirements.txt
+      - mkdir -p /home/ubuntu/CodeGen
+      - cd /home/ubuntu/CodeGen/
+      - wget https://gersteincodegenprod.s3.amazonaws.com/packages.zip      
+      - unzip packages.zip
+
+  - name: "Download fuzzer"
+    commands:
+      - cd /home/ubuntu/
+      - wget https://gersteincodegenprod.s3.amazonaws.com/fuzzer/run_java.sh
+      - chmod +x run_java.sh
+  
+  - name: "Pip install requirements"
+    commands:
+      - mamba run -n test python -m pip install -r requirements.txt
+  
+  
+build_commands:
+  - name: "Build Command"
+    commands:
+      - echo 'Hello World'
+      - echo 'Hello World 2'
+    analysis_method: "live"
+
+
+run_commands:
+  - name: "Run Command"
+    commands:
+      - echo 'Hello World'
+      - echo 'Hello World 2'
+    analysis_method: "fuzzer"
