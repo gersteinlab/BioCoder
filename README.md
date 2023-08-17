@@ -76,3 +76,14 @@ Load test cases with the following command:
 
 Contains a Jupyter notebook to analyze the list of 1740 Github repositories as found in the article
 
+## datasets
+
+Contains the functions that make up the various parts of the benchmark.
+
+`java_hidden.json`: A JSON of the 1243 Java functions that make up the Java part of the "hidden" dataset of the benchmark
+`java_public.json`: A JSON of the 50 Java functions that make up the Java part of the "public" dataset of the benchmark
+`java_simlar.json`: A JSON of the 50 Java functions that make up the Java part of the "similar" dataset of the benchmark
+`python_hidden.json`: A JSON of the 1026 Python functions that make up the Python part of the "hidden" dataset of the benchmark
+`python_public.json`: A JSON of the 50 Python functions that make up the Python part of the "public" dataset of the benchmark
+`python_simlar.json`: A JSON of the 50 Python functions that make up the Python part of the "similar" dataset of the benchmark
+`rosalind.json`: A JSON of the 253 Rosalind functions that make up the Rosalind part of the "public" dataset of the benchmark
