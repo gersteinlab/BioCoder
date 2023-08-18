@@ -1,4 +1,4 @@
-# Codegen
+# BioCoder
 
 A research project looking into modern LLMs ability to generate bioinformatics specific code.
 
