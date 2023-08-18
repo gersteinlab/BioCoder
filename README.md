@@ -4,9 +4,11 @@ A research project looking into modern LLMs ability to generate bioinformatics s
 
 # Project Structure
 
-The repository comprises of 4 main parts: evaluation, inference, parsing, and data. Each section is described below.
+The repository comprises of 4 main parts: evaluation, inference, parsing, and data. We use the data folder to store results between each step in the operations. Ensure that each step is run from the root directory, i.e. `python3 parsing/parse.py` and not `cd parsing && python3 parse.py` in order to avoid issues with relative paths.
 
-# Parsing
+Each section is described below.
+
+## Parsing
 
 The parsing section contains the code used to analyze, parse, and extract functions from the repositories. 
 

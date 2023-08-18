@@ -8,7 +8,8 @@ from nltk.probability import FreqDist
 import tiktoken
 
 print('starting')
-with open("/home/ubuntu/Bio-Code-Eval/FunctionExtractor/methods.json", "r") as f:
+# TODO: change url
+with open("methods.json", "r") as f:
     methods = json.load(f)
 
 arr = []

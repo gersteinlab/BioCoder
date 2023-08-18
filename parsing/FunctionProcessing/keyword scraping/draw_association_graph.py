@@ -6,7 +6,7 @@ from tqdm import tqdm
 from multiprocessing import Pool
 import scipy 
 # Read article names from the text file
-with open('/home/ubuntu/Bio-Code-Eval/Bio-Code-Eval-new/2-filter-and-annotate/dictionary.txt', 'r') as f:
+with open('data/parsing/keyword_scrape/dictionary.txt', 'r') as f:
     article_names = [line.strip() for line in f.readlines()]
 
 # Scrape Wikipedia articles and references

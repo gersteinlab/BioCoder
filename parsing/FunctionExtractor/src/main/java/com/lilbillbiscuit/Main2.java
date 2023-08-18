@@ -359,7 +359,7 @@ public class Main2 {
             System.out.println("Writing " + repo);
             JSONObject obj = new JSONObject();
             obj.put("methods", map.get(repo));
-            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("methods_data/methods_" + repo + ".json")));
+            PrintWriter out = new PrintWriter(new BufferedWriter(new FileWriter("data/parsing/languages/Java/methods_data/methods_" + repo + ".json")));
             out.println(obj);
             out.close();
         }
