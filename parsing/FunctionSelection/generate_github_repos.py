@@ -1,12 +1,15 @@
-import pandas as pd
+"""
+This script collects information about multiple GitHub repositories using the GitHub API.
+It reads a list of repository URLs from a file, makes API requests to fetch data for each repository,
+including repository details and language statistics, and then saves the collected data as a pickled file.
+Please add your own API key for github, the authorization and X-GitHub-API-Version
+"""
 import requests
 import json
 import pickle
 
-# df = pd.read_csv(r'./repo_and_article_info-Table 1.csv')
 
-API_KEY = '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'
- 
+API_KEY = 'API_KEY'
 #read whole file to a string
 
 URL = 'https://api.github.com/repos/'
@@ -17,8 +20,8 @@ with open('./all_repos.txt', 'r') as f:
     for line in f:
         print(i)
         headers = {
-            "Authorization": "Bearer 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",
-            "X-GitHub-Api-Version": "2022-11-28"
+            "Authorization": "YOUR INFORMATION HERE",
+            "X-GitHub-Api-Version": "VERSION HERE"
         }
         r1 = requests.get(URL + line[:-1], headers=headers)
         r1 = json.loads(r1.text)

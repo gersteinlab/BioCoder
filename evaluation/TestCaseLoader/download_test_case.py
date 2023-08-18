@@ -1,3 +1,9 @@
+"""
+This script allows users to input an ID corresponding to a file
+and its related zip archive hosted on S3. It repeatedly
+downloads these files using the provided ID and S3 URLs and
+saves them into a local "outputs" directory.
+"""
 import os
 import zipfile
 import shutil

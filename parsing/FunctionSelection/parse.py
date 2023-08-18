@@ -1,3 +1,14 @@
+"""
+analyzing Python code files in a given directory, extracting information about functions,
+classes, imports, and more, and storing this information in structured JSON files for further analysis and
+documentation.
+The input variables required are the PACKAGE_DIRECTORY,PACKAGE_NAME, and REPO_AUTHOR environment variables --> Provided
+by parse_github_repos.py
+and the output includes JSON files for the repository, containing each of these datapoints:.
+'id', 'filePath', 'numLines', 'lineStart', 'lineEnd', 'numParams', 'signature',
+'comment', 'numCommentLines', 'content', 'parentClass', 'packageName', 'imports'
+"""
+
 import ast
 import astor
 import os

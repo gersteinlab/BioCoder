@@ -1,3 +1,8 @@
+"""
+The purpose of the file is to automate the parsing of repositories by 
+calling parse.py for each repository
+"""
+
 import subprocess
 import os
 from tqdm import tqdm

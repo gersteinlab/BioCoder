@@ -2,18 +2,15 @@
 
 A research project looking into modern LLMs ability to generate bioinformatics specific code.
 
+# Project Structure
+
+The repository comprises of 4 main parts: evaluation, inference, parsing, and data. Each section is described below.
+
+# Parsing
+
+The parsing section contains the code used to analyze, parse, and extract functions from the repositories. 
+
 # Overview
-
-## codex_src
-
-Contains the scripts required to generate and test CODEX output
-
-* 50.txt - file containing 47 CODEX API keys
-* codex_master.py - file that spins up `codex.py` processes
-* codex.py - file that is generates CODEX output by calling the API
-* splice_codex_output.py - file that combines `.pkl` output of codex.py into a more friendly `.json` format
-* send_json_requests.py - (WIP) file that sends the requests to start testing CODEX outputs via the testing framework
-* generate_passk.py - (WIP) file that calculates the Pass@K values given testing data
 
 ## json_files
 

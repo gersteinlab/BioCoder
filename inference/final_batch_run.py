@@ -1,3 +1,16 @@
+"""
+Interface for running locally inferenced models.
+Takes these parameters:
+num_gpus -> Number of GPUs in Cluster
+gpus_per_script -> Assignment of GPUs per task
+model_type -> What model to run
+generation_version -> Backend version track
+max_length -> Model max token length
+max_generation -> Model max token output
+PROMPT_AMOUNT -> Prompts numbers
+use_summary_only -> distinguish between full sized and reduced prompts
+"""
+
 from transformers import AutoModelForCausalLM, AutoTokenizer
 from tqdm import tqdm
 from multiprocessing import Pool

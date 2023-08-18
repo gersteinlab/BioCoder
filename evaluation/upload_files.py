@@ -1,3 +1,10 @@
+"""
+The script facilitates the distribution and organization of various
+files needed for different components and tools by uploading them to an S3 bucket.
+This process helps in ensuring that the required resources are readily available
+for the respective components of a larger system.
+"""
+
 import boto3
 
 s3 = boto3.client('s3')

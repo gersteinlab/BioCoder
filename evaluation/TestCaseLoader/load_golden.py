@@ -1,3 +1,10 @@
+"""
+This script generates test cases for Java and Python datasets,
+packages them into zip files, uploads them to S3, and notifies an
+API service about the added test cases for further testing.
+It uses multiprocessing for efficiency and is designed to operate in different
+environments based on environment variables.
+"""
 import os
 from tqdm import tqdm
 import requests
