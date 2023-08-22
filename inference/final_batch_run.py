@@ -29,20 +29,20 @@ gpus_per_script = 1
 
 model_type = "bigcode/santacoder"
 generation_version = "v1"
-prompt_basefolder = "/output/Prompts"
-base_folder_url = "/output"
+prompt_basefolder = "data/prompts/Prompts"
+base_folder_url = "data/generated"
 max_length = 8192
 max_generation = 256
 PROMPT_AMOUNT = 20
 use_summary_only = False
 tolerance = 128
 
-os.environ["HUGGING_FACE_HUB_TOKEN"] = "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"
-os.environ["TRANSFORMERS_CACHE"] = "/data"
+os.environ["HUGGING_FACE_HUB_TOKEN"] = "" # TODO: fill in an API key
+# os.environ["TRANSFORMERS_CACHE"] = "/data" # uncomment this to set the model cache directory
+discord_url = "DISCORD_WEBHOOK_URL"
+
 
 base_folder_url = f"{base_folder_url}/{model_type}/{generation_version}"
-
-discord_url = ""
 
 message_id = None
 def send_log(content):
@@ -137,16 +137,18 @@ class Model:
 
         self.device = torch.device(f"cuda:0")
 
+        # TODO: model init, edit this
         self.tokenizer = AutoTokenizer.from_pretrained(model_type, cache_dir=os.environ["TRANSFORMERS_CACHE"])
         self.model = AutoModelForCausalLM.from_pretrained(model_type, trust_remote_code=True, cache_dir=os.environ["TRANSFORMERS_CACHE"], load_in_8bit=True, device_map="auto")
 
         self.inuse = False
 
-    def predict(self, prompt, max_length):
+    def predict(self, prompt, max_length) -> str:
         while self.inuse:
             time.sleep(0.1)
         self.inuse = True
 
+        # TODO: prediction function, edit this. It should return the generated code given the prompt
         input_ids = self.tokenizer.encode(prompt, return_tensors="pt").to(self.device)
 
         output = self.model.generate(
@@ -173,7 +175,7 @@ class Model:
 
 
 def create_prompt(instruction: str):
-
+    # TODO: change this function to create a prompt given the instruction
     # get index of last line without a # in it
     index = 0
     for line in instruction.split("\n"):

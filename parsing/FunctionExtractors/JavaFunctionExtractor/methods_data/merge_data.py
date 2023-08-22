@@ -44,7 +44,7 @@ def save_to_json(df, save_location):
     df.to_json(save_location)
 
 def main():
-    directory = 'parsing/FunctionExtractor/methods_data'
+    directory = 'parsing/JavaFunctionExtractor/methods_data'
     save_location = 'data/parsing/languages/Java/java_functions.json'
     df = load_data_from_directory(directory)
     df = filter_data(df)
