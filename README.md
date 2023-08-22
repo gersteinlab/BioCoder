@@ -1,5 +1,6 @@
 # [BioCoder](https://biocoder-benchmark.github.io)
-A research project looking into modern LLMs ability to generate bioinformatics specific code.
+
+BioCoder is a challenging bioinformatics code generation benchmark for examining the capabilities of state-of-the-art large language models (LLMs)
 
 # Project Structure
 
