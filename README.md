@@ -9,7 +9,7 @@ BioCoder is a challenging bioinformatics code generation benchmark for examining
 
 # Project Structure
 
-The repository comprises of 4 main parts: evaluation, inference, parsing, and data. We use the data folder to store results between each step in the operations. Ensure that each step is run from the root directory, i.e. `python3 parsing/parse.py` and not `cd parsing && python3 parse.py` in order to avoid issues with relative paths.
+The repository comprises 4 main parts: evaluation, inference, parsing, and data. We use the data folder to store results between each step in the operations. Ensure that each step is run from the root directory, i.e. `python3 parsing/parse.py` and not `cd parsing && python3 parse.py` in order to avoid issues with relative paths.
 
 Each section is described below.
 
@@ -21,13 +21,13 @@ Begin the process by going through a list of GitHub repositories. Download the l
 
 [A large-scale analysis of bioinformatics code on GitHub](https://journals.plos.org/plosone/article?id=10.1371/journal.pone.0205898)
 
-Then, open the notebook in GithubAnalysis to start the repository metadata gathering process. Note that this may fully clone all available GitHub repositories in the list. This may take a long time. Then, use the scripts in FunctionSelection to filter the GitHub functions accordingly.
+Then, open the notebook in GithubAnalysis to start the repository metadata-gathering process. Note that this may fully clone all available GitHub repositories in the list. This may take a long time. Then, use the scripts in FunctionSelection to filter the GitHub functions accordingly.
 
 Next, we need to do the function extraction step. We have created parsers for Java and Python so far. The corresponding documentation can be found in the respective folders:
 - [Java Parsing](parsing/FunctionExtractors/JavaFunctionExtractor/README.md)
 - [Python Parsing](parsing/FunctionExtractors/PythonFunctionExtractor/README.md)
 
-After parsing, the output should be a JSON format with consistent properties across all languages. The following columns are guaranteed, however they may be extra columns for specific languages:
+After parsing, the output should be a JSON format with consistent properties across all languages. The following columns are guaranteed, however, they may be extra columns for specific languages:
 * `function_id`: A unique identifier for the function. This is the hashcode of the function's signature.
 * `numParams`: The number of parameters the function has.
 * `numLines`: The number of lines the function spans.
@@ -111,3 +111,14 @@ We provide our completed public dataset in this GitHub repository. It consists o
 * `python_public.json`: A JSON of the 50 Python functions that make up the Python part of the "public" dataset of the benchmark
 * `python_simlar.json`: A JSON of the 50 Python functions that make up the Python part of the "similar" dataset of the benchmark
 * `rosalind.json`: A JSON of the 253 Rosalind functions that make up the Rosalind part of the "public" dataset of the benchmark
+
+## Citation
+If you find our work useful in your research, please kindly consider cite:
+```
+@article{tang2023biocoder,
+  title={BioCoder: A Benchmark for Bioinformatics Code Generation with Contextual Pragmatic Knowledge},
+  author={Tang, Xiangru and Qian, Bill and Gao, Rick and Chen, Jiakang and Chen, Xinyun and Gerstein, Mark},
+  journal={arXiv preprint arXiv:2308.16458},
+  year={2023}
+}
+```
