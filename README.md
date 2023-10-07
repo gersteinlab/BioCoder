@@ -98,7 +98,55 @@ Load test cases with the following command:
 
 Create a Docker image with `evaluation/DockerServers/Dockerfile`
 
+### Setting up Rosalind Evaluation Framework
 
+1. First do all the Rosalind evaluations in the folder named "TestRosalind", and ensure that the following files are available: "run_script.sh", "skeleton.py", and "tester.py"
+2. Make sure the code generation outputs are in a folder called "outputs" with the following structure: under "outputs" there is a folder for each Rosalind problem, i.e. there will be a folder named "2sat", a folder named "2sum", etc. Under each of these folders there will be 20 code generation text files, numbered "1.txt" through "20.txt". Here is a visual representation
+  
+outputs/<br>
+├─ 2sat/<br>
+│  &nbsp;├─ 1.txt<br>
+│  &nbsp;├─ 2.txt<br>
+│  &nbsp;...<br>
+│  &nbsp;├─ 20.txt<br>
+├─ 2sum/<br>
+├─ afrq/<br>
+,,,
+
+3. When the "outputs" folder is currently formated as explained above, you can run the "tester.py" file under "TestRosalind". After this file finishes running, there will be a "results.json" file that stores a spreadsheet of the results of the code generation outputs. There are three columns: "Problem", "Generation", and "Passed". "Problem" indicates the name of the problem that was tested, "Generation" indicates the generation number, and "Passed" will be a boolean of whether the specified generation number of the specified problem actually resulted in accurate code. For instance if a row in the spreadsheet is ["2sat", 3, True], then this means that the generated code in "TestRosalind/outputs/2sat/3.txt" is correct and passes the problem.
+
+4. Here is some sample code that can be used to extract Pass@K results from the "results.json" file
+
+```python
+import numpy as np
+import pandas as pd
+import os
+
+def pass_at_k(n, c, k):
+    if n - c < k: return 1.0
+    return 1.0 - np.prod(1.0 - k / np.arange(n - c + 1, n + 1))
+
+df = pd.read_json('results.json')
+
+pk_df = pd.DataFrame(columns=['Problem', 'NumPassed', 'PassAt1', 'PassAt5', 'PassAt10', 'PassAt20'])
+
+num_passed = {}
+for prob in os.listdir('/home/ubuntu/CodeGen/rebuttal_jiakang/TestRosalind/outputs'):
+    num_passed[prob] = 0
+
+for _, row in df.iterrows():
+    if row['Passed']:
+        num_passed[row['Problem']] += 1
+
+for prob in num_passed.keys():
+    c = num_passed[prob]
+    pk_df.loc[len(pk_df)] = [prob, c, pass_at_k(20, c, 1), pass_at_k(20, c, 5), pass_at_k(20, c, 10), pass_at_k(20, c, 20)]
+
+print(pk_df['PassAt1'].mean())
+print(pk_df['PassAt5'].mean())
+print(pk_df['PassAt10'].mean())
+print(pk_df['PassAt20'].mean())
+```
 
 ## datasets
 
