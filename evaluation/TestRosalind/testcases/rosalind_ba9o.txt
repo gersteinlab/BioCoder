@@ -1,0 +1,3 @@
+ACGT
+GG AC
+1

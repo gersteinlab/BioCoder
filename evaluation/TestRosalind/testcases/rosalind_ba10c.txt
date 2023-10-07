@@ -1,0 +1,13 @@
+zxxxxyzzxyxyxyzxzzxzzzyzzxxxzxxyyyzxyxzyxyxyzyyyyzzyyyyzzxzxzyzzzzyxzxxxyxxxxyyzyyzyyyxzzzzyzxyzzyyy
+--------
+x y z
+--------
+A B
+--------
+	A	B
+A	0.634	0.366	
+B	0.387	0.613	
+--------
+	x	y	z
+A	0.532	0.226	0.241	
+B	0.457	0.192	0.351
