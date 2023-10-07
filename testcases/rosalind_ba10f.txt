@@ -1,0 +1,10 @@
+0.399	0.01
+--------
+A B C D E
+--------
+ED-BCBDAC
+-D-ABBDAC
+ED--EBD-C
+-C-BCB-D-
+AD-BC-CA-
+-DDB-BA-C

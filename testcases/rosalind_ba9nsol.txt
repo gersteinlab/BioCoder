@@ -1,0 +1,5 @@
+GT:
+AGCT:
+TAA:
+AAT:
+AATAT:
