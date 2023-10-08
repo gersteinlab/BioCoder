@@ -131,7 +131,7 @@ df = pd.read_json('results.json')
 pk_df = pd.DataFrame(columns=['Problem', 'NumPassed', 'PassAt1', 'PassAt5', 'PassAt10', 'PassAt20'])
 
 num_passed = {}
-for prob in os.listdir('/home/ubuntu/CodeGen/rebuttal_jiakang/TestRosalind/outputs'):
+for prob in os.listdir('./TestRosalind/outputs'):
     num_passed[prob] = 0
 
 for _, row in df.iterrows():
