@@ -30,11 +30,11 @@ dataset="Java"
 
 # python_context_path_base = '/home/ubuntu/CodeGen/BCE/Results/Prompts/Python/Context'
 # python_golden_path_base = '/home/ubuntu/CodeGen/BCE/Results/Prompts/Python/GoldenCode'
-java_context_path_base = '/output/Prompts/Java/Context'
-java_golden_path_base = '/output/Prompts/Java/GoldenCode'
+java_context_path_base = '/output/Prompts/Java/Context' # Path to Java context
+java_golden_path_base = '/output/Prompts/Java/GoldenCode' # Path to Java golden code
 
-python_context_path_base = '/output/Prompts/Python/Context'
-python_golden_path_base = '/output/Prompts/Python/GoldenCode'
+python_context_path_base = '/output/Prompts/Python/Context' # Path to Python context
+python_golden_path_base = '/output/Prompts/Python/GoldenCode' # Path to Python golden code
 
 
 

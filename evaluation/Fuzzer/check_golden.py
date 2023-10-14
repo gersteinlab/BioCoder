@@ -5,11 +5,11 @@ from tqdm import tqdm
 cnt = 1
 startAt = 146
 
-context_path = '/home/ubuntu/CodeGen/BCE/Java/Context/'
-generated_path = '/home/ubuntu/CodeGen/BCE/Java/GeneratedCode/'
-golden_path = '/home/ubuntu/CodeGen/BCE/Java/GoldenCode/'
+context_path = '/home/ubuntu/CodeGen/BCE/Java/Context/' # Replace with your Java context path
+generated_path = '/home/ubuntu/CodeGen/BCE/Java/GeneratedCode/' # Replace with your Java generated code path
+golden_path = '/home/ubuntu/CodeGen/BCE/Java/GoldenCode/' # Replace with your Java golden code path
 
-for filename in tqdm(os.listdir('/home/ubuntu/CodeGen/BCE/Java/Context')):
+for filename in tqdm(os.listdir(context_path)): 
     # if cnt < startAt:
     #     cnt += 1
     #     continue 

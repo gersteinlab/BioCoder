@@ -3,8 +3,8 @@ import csv
 import pandas as pd
 
 # Replace 'input.csv' with the name of your CSV file
-csv_file = '/home/ubuntu/CodeGen/BCE/FunctionProcessing/dictionary.txt'
-inputs_path = '/home/ubuntu/CodeGen/BCE/FileStructure/Python/HelperFunctions/final_filtered-py_func.json'
+csv_file = '/home/ubuntu/CodeGen/BCE/FunctionProcessing/dictionary.txt' # Replace with your path to dictionary of keywords
+inputs_path = '/home/ubuntu/CodeGen/BCE/FileStructure/Python/HelperFunctions/final_filtered-py_func.json' # Replace with your path to Python functions
 inputs = pd.read_json(inputs_path)
 
 print(len(inputs))

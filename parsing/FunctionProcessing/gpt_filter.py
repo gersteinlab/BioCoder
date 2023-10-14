@@ -2,7 +2,7 @@ import openai
 import tenacity
 from tenacity import retry, stop_after_attempt, wait_exponential  
 import pandas as pd
-filepath = "/home/ubuntu/CodeGen/BCE/FileStructure/Python/PythonSelected/all_functions.json"
+filepath = "/home/ubuntu/CodeGen/BCE/FileStructure/Python/PythonSelected/all_functions.json" # Replace with path to all Python functions
 data = pd.read_json(filepath)
 gpt_outputs = []
 openai.api_key = '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'  

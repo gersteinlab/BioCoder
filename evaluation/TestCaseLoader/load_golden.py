@@ -23,11 +23,11 @@ model_name = "codegen-6B-mono"
 version = "v2"
 dataset="Java"
 
-java_context_path_base = '/home/ubuntu/CodeGen/BCE/Java/Context'
-java_golden_path_base = '/home/ubuntu/CodeGen/BCE/Java/GoldenCode'
+java_context_path_base = '/home/ubuntu/CodeGen/BCE/Java/Context' # Replace with your path to Java context folder
+java_golden_path_base = '/home/ubuntu/CodeGen/BCE/Java/GoldenCode' # Replace with your path to Java golden code folder
 
-python_context_path_base = '/home/ubuntu/CodeGen/BCE/GenerateTesting/Context'
-python_golden_path_base = '/home/ubuntu/CodeGen/BCE/GenerateTesting/GoldenCode'
+python_context_path_base = '/home/ubuntu/CodeGen/BCE/GenerateTesting/Context' # Replace with your path to Python context folder
+python_golden_path_base = '/home/ubuntu/CodeGen/BCE/GenerateTesting/GoldenCode' # Replace with your path to Python golden code folder
 
 
 if "TESTING" in os.environ:
@@ -68,7 +68,7 @@ def run(model_name, version, dataset, generated_path_base):
             continue
 
         # check if path exists in ZipFiles
-        zip_base = f'/home/ubuntu/CodeGen/BCE/GenerateTesting/ZipFiles/{model_name}/{version}'
+        zip_base = f'/home/ubuntu/CodeGen/BCE/GenerateTesting/ZipFiles/{model_name}/{version}' # Replace with your path to generated outputs
         
         if not os.path.exists(zip_base):
             os.makedirs(zip_base)
@@ -131,7 +131,7 @@ def run_proxy(obj):
 import multiprocessing
 
 if __name__ == '__main__':
-    java_url = "/home/ubuntu/CodeGen/BCE/Java/GeneratedCode"
-    python_url= "/home/ubuntu/CodeGen/BCE/GenerateTesting/GeneratedCode"
+    java_url = "/home/ubuntu/CodeGen/BCE/Java/GeneratedCode" # Replace with your path to Java generated code folder
+    python_url= "/home/ubuntu/CodeGen/BCE/GenerateTesting/GeneratedCode" # Replace with your path to Python generated code folder
     obj = (java_url, "Java")
     run_proxy(obj)

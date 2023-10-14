@@ -9,7 +9,7 @@ def timeout_handler(signum, frame):
 def worker(args):
     prob, gen_num = args
 
-    base_path = Path('/home/ubuntu/CodeGen/rebuttal_jiakang/TestRosalind')
+    base_path = Path('/home/ubuntu/CodeGen/rebuttal_jiakang/TestRosalind') # Replace with your path to the base folder for all Rosalind testing
     output_path = base_path / 'outputs'
     skeleton_path = base_path / 'skeleton.py'
     testcase_path = base_path / 'testcases'
@@ -72,7 +72,7 @@ def worker(args):
     return [prob, gen_num, passed_test]
 
 if __name__ == '__main__':
-    base_path = Path('/home/ubuntu/CodeGen/rebuttal_jiakang/TestRosalind')
+    base_path = Path('/home/ubuntu/CodeGen/rebuttal_jiakang/TestRosalind') # Replace with your path to the base folder for all Rosalind testing
     output_path = base_path / 'outputs'
 
     data = []
