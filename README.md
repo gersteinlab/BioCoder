@@ -54,6 +54,30 @@ Then, use the scripts in FunctionProcessing to process the functions. This inclu
 
 Note that there are also some scripts that assist with the manual annotation of context generation. These are not necessary for the benchmark, but are included for completeness.
 
+### Custom Python Parsing
+
+In order to perform custom parsing on a Python repository, one can use the `parse.py` file under `parsing/FunctionExtractors/parse.py`. Before running one must make sure that a `json_files` folder must be in the same repository as `parse.py` as well as a`github_repos` folder must be in the same repository as `parse.py`. In the `github_repos` folder, one can include the physical repositories that one desires to parse. In order to run `parse.py` one must define the `PACKAGE_DIRECTORY`, `PACKAGE_NAME`, and `REPO_AUTHOR` variables. For instance, if you want to parse the files under the `Bio/AlignIO` folder in the `biopython` repository, with the author of the repository also being `biopython`, then you would set
+```pyython
+PACKAGE_DIRECTORY = biopython/Bio/AlignIO
+PACKAGE_NAME = AlignIO
+REPO_AUTHOR = biopython
+```
+and here is some sample code to run the parser:
+```python
+import os, subprocess
+
+directory = 'biopython/Bio/AlignIO'
+author = 'biopython'
+
+os.environ['PACKAGE_DIRECTORY'] = os.path.join('./github_repos', directory)
+package_name = directory.split('/')[-1]
+os.environ['PACKAGE_NAME'] = package_name
+os.environ['REPO_AUTHOR'] = author
+subprocess.run('python3 parse.py', shell=True)
+```
+
+The result will be a file named `{PACKAGE_NAME}_functions.json` which includes the main json file containing all the parsed functions. There will also be a file named `AlignIO_file_imports.json` which includes the import packages necessary to complete the parsing.
+
 ## Inference
 This section consists of all files necessary to generate the outputs across different models.
 
