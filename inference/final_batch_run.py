@@ -25,9 +25,9 @@ import random
 transformers.logging.set_verbosity_error()
 
 num_gpus = 8
-gpus_per_script = 1
+gpus_per_process = 1
 
-model_type = "bigcode/santacoder"
+model_name_or_path = "bigcode/santacoder"
 generation_version = "v1"
 prompt_basefolder = "data/prompts/Prompts"
 base_folder_url = "data/generated"
@@ -37,12 +37,12 @@ PROMPT_AMOUNT = 20
 use_summary_only = False
 tolerance = 128
 
-os.environ["HUGGING_FACE_HUB_TOKEN"] = "" # TODO: fill in an API key
+os.environ["HUGGING_FACE_HUB_TOKEN"] = "" # TODO: fill in an API key if necessary
 # os.environ["TRANSFORMERS_CACHE"] = "/data" # uncomment this to set the model cache directory
 discord_url = "DISCORD_WEBHOOK_URL"
 
 
-base_folder_url = f"{base_folder_url}/{model_type}/{generation_version}"
+base_folder_url = f"{base_folder_url}/{model_name_or_path}/{generation_version}"
 
 message_id = None
 def send_log(content):
@@ -275,8 +275,8 @@ def run_subset(files, cuda_index, position):
 
     print("Initializing model on GPU "+str(cuda_index)+"...")
     os.environ["CUDA_VISIBLE_DEVICES"] = str(cuda_index)
-    send_initial(f'`[GPU{cuda_index}, {hostname}, {model_type}]` Initializing...')
-    model = Model(cuda_index, model_type)
+    send_initial(f'`[GPU{cuda_index}, {hostname}, {model_name_or_path}]` Initializing...')
+    model = Model(cuda_index, model_name_or_path)
     
 
     gpu_desc_base = "GPU "+str(cuda_index)
@@ -291,9 +291,9 @@ def run_subset(files, cuda_index, position):
             
             generate_code(model, file, pbar)
     except Exception as e:
-        send_update(f"`[GPU{cuda_index}, {hostname}, {model_type}]` ERROR\n{traceback.format_exc()}")
+        send_update(f"`[GPU{cuda_index}, {hostname}, {model_name_or_path}]` ERROR\n{traceback.format_exc()}")
         raise e
-    send_update(f"`[GPU{cuda_index}, {hostname}, {model_type}]` Done")
+    send_update(f"`[GPU{cuda_index}, {hostname}, {model_name_or_path}]` Done")
 
 
 def get_file_paths(root_dir):
@@ -325,7 +325,7 @@ def get_file_paths(root_dir):
 def signal_handler(sig, frame):
     print('stopped')
     hostname = socket.gethostname()
-    send_log(f"Stopped {hostname}, was running model {model_type}")
+    send_log(f"Stopped {hostname}, was running model {model_name_or_path}")
     exit(0)
 signal.signal(signal.SIGINT, signal_handler)
 
@@ -345,36 +345,50 @@ if __name__ == "__main__":
 
     # add argument for --firstrun
     parser.add_argument("--firstrun", help="set to true if this is the first time you are running this script", action="store_true")
-    parser.add_argument("--one", help="run the first process only", action="store_true", required=False)
-    parser.add_argument("--two", help="run the second process only", action="store_true", required=False)
+    # add all global variables as arguments
+    parser.add_argument("--num_gpus", help="number of GPUs in cluster", type=int, default=num_gpus)
+    parser.add_argument("--gpus_per_process", help="number of GPUs per process", type=int, default=gpus_per_process)
+    parser.add_argument("--model_name_or_path", help="model name or path", type=str, default=model_name_or_path)
+    parser.add_argument("--generation_version", help="generation version", type=str, default=generation_version)
+    parser.add_argument("--max_length", help="max length", type=int, default=max_length)
+    parser.add_argument("--max_generation", help="max generation", type=int, default=max_generation)
+    parser.add_argument("--PROMPT_AMOUNT", help="prompt amount", type=int, default=PROMPT_AMOUNT)
+    parser.add_argument("--use_summary_only", help="use summary only", type=bool, default=use_summary_only)
+    parser.add_argument("--tolerance", help="tolerance", type=int, default=tolerance)
+    parser.add_argument("--discord_url", help="discord url", type=str, default=discord_url)
+    parser.add_argument("--base_folder_url", help="base folder url", type=str, default=base_folder_url)
+    parser.add_argument("--prompt_basefolder", help="prompt basefolder", type=str, default=prompt_basefolder)
     args = parser.parse_args()
+
+    # set all global variables to the arguments
+    num_gpus = args.num_gpus
+    gpus_per_process = args.gpus_per_process
+    model_name_or_path = args.model_name_or_path
+    generation_version = args.generation_version
+    max_length = args.max_length
+    max_generation = args.max_generation
+    PROMPT_AMOUNT = args.PROMPT_AMOUNT
+    use_summary_only = args.use_summary_only
+    tolerance = args.tolerance
+    discord_url = args.discord_url
+    base_folder_url = args.base_folder_url
+    prompt_basefolder = args.prompt_basefolder
+
 
     if args.firstrun:
 
         print("First run detected. Initializing models...")
 
-        model = Model(0, model_type)
+        model = Model(0, model_name_or_path)
 
         print("Done initializing models")
         exit(0)
     
     hostname = socket.gethostname()
     # Initialize cuda devices and models
-    cuda_devices = [','.join(map(str, range(i, i + gpus_per_script))) for i in range(0, num_gpus, gpus_per_script)]
-    send_log(f"Started {hostname}, running model {model_type} on {len(cuda_devices)} GPUs")
+    cuda_devices = [','.join(map(str, range(i, i + gpus_per_process))) for i in range(0, num_gpus, gpus_per_process)]
+    send_log(f"Started {hostname}, running model {model_name_or_path} on {len(cuda_devices)} GPUs")
     num_subsets = len(cuda_devices)
-    
-    # if args.one, run every other process
-    if args.one:
-        files = files[::2]
-    
-    # if args.two, run every other process
-    if args.two:
-        files = files[1::2]
-    
-    if args.one and args.two:
-        print("Error: cannot run both --one and --two")
-        exit(0)
 
     subsets = []
     for i in range(num_subsets):
@@ -384,4 +398,4 @@ if __name__ == "__main__":
         p.starmap(run_subset, subsets)
 
     print("Done generating code")
-    send_log(f"Done generating code on {hostname}, running model {model_type} on {len(cuda_devices)} GPUs")
+    send_log(f"Done generating code on {hostname}, running model {model_name_or_path} on {len(cuda_devices)} GPUs")

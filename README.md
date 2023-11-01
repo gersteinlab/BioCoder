@@ -83,12 +83,58 @@ This section consists of all files necessary to generate the outputs across diff
 
 For convenience on running the script across multiple machines (output generation takes a long time, especially for these prompts), we have included a requirements.txt with the exact dependencies that we used.
 
-The following steps are required to generate the outputs. They are all marked with `TODO` in the code.
-- Change the parameters at the top of the code to fit your environment.
-- Change the model name and initialization code starting with the line `# TODO: model init, edit this`
-- Change the prediction code starting with the line `# TODO: prediction code, edit this`
+[//]: # (%     parser.add_argument&#40;"--firstrun", help="set to true if this is the first time you are running this script", action="store_true"&#41;)
 
-Then, install the requirements with `python -m pip install inference/requirements.txt`, and run with `python inference/final_batch_run.py`.
+[//]: # (    # add all global variables as arguments)
+
+[//]: # (    parser.add_argument&#40;"--num_gpus", help="number of GPUs in cluster", type=int, default=num_gpus&#41;)
+
+[//]: # (    parser.add_argument&#40;"--gpus_per_process", help="number of GPUs per process", type=int, default=gpus_per_process&#41;)
+
+[//]: # (    parser.add_argument&#40;"--model_name_or_path", help="model name or path", type=str, default=model_name_or_path&#41;)
+
+[//]: # (    parser.add_argument&#40;"--generation_version", help="generation version", type=str, default=generation_version&#41;)
+
+[//]: # (    parser.add_argument&#40;"--max_length", help="max length", type=int, default=max_length&#41;)
+
+[//]: # (    parser.add_argument&#40;"--max_generation", help="max generation", type=int, default=max_generation&#41;)
+
+[//]: # (    parser.add_argument&#40;"--PROMPT_AMOUNT", help="prompt amount", type=int, default=PROMPT_AMOUNT&#41;)
+
+[//]: # (    parser.add_argument&#40;"--use_summary_only", help="use summary only", type=bool, default=use_summary_only&#41;)
+
+[//]: # (    parser.add_argument&#40;"--tolerance", help="tolerance", type=int, default=tolerance&#41;)
+
+[//]: # (    parser.add_argument&#40;"--discord_url", help="discord url", type=str, default=discord_url&#41;)
+
+[//]: # (    parser.add_argument&#40;"--base_folder_url", help="base folder url", type=str, default=base_folder_url&#41;)
+
+[//]: # (    parser.add_argument&#40;"--prompt_basefolder", help="prompt basefolder", type=str, default=prompt_basefolder&#41;)
+
+[//]: # (    args = parser.parse_args&#40;&#41;)
+
+The following arguments are available:
+
+* `--num_gpus`: The number of GPUs in the cluster. This is used to determine the number of processes to spawn.
+* `--gpus_per_process`: The number of GPUs per process. This is used to determine the number of processes to spawn.
+* `--model_name_or_path`: The model name or path to use. This is used to determine the model to use.
+* `--generation_version`: The generation version to use. This is used to determine the generation version to use.
+* `--max_length`: The maximum length of the output. This is used to determine the maximum length of the output.
+* `--max_generation`: The maximum number of generations to perform. This is used to determine the maximum number of generations to perform.
+* `--PROMPT_AMOUNT`: The number of prompts to generate. This is used to determine the number of prompts to generate.
+* `--use_summary_only`: Whether to use the summary only. This is used to determine whether to use the summary only.
+* `--tolerance`: The tolerance to use. This is used to determine the tolerance to use.
+* `--base_folder_url`: The base folder URL to use. This is used to determine the base folder URL to use.
+* `--prompt_basefolder`: The prompt basefolder to use. This is used to determine the prompt basefolder to use.
+
+After installing the dependencies, you can install everything with `pip3 install -r requirements.txt`.
+
+Then, run the following command to generate the outputs:
+
+```bash
+python3 inference/final_batch_run.py --num_gpus 8 --gpus_per_process 1 --model_name_or_path bigcode/starcoder --generation_version 1 --max_length 8192 --max_generation 200 --PROMPT_AMOUNT 20 --use_summary_only True --tolerance 0.9 --base_folder_url data/ --prompt_basefolder prompts
+```
+
 
 
 
