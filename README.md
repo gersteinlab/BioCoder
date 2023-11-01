@@ -57,7 +57,7 @@ Note that there are also some scripts that assist with the manual annotation of 
 ### Custom Python Parsing
 
 In order to perform custom parsing on a Python repository, one can use the `parse.py` file under `parsing/FunctionExtractors/parse.py`. Before running one must make sure that a `json_files` folder must be in the same repository as `parse.py` as well as a`github_repos` folder must be in the same repository as `parse.py`. In the `github_repos` folder, one can include the physical repositories that one desires to parse. In order to run `parse.py` one must define the `PACKAGE_DIRECTORY`, `PACKAGE_NAME`, and `REPO_AUTHOR` variables. For instance, if you want to parse the files under the `Bio/AlignIO` folder in the `biopython` repository, with the author of the repository also being `biopython`, then you would set
-```pyython
+```python
 PACKAGE_DIRECTORY = biopython/Bio/AlignIO
 PACKAGE_NAME = AlignIO
 REPO_AUTHOR = biopython
@@ -78,40 +78,32 @@ subprocess.run('python3 parse.py', shell=True)
 
 The result will be a file named `{PACKAGE_NAME}_functions.json` which includes the main json file containing all the parsed functions. There will also be a file named `AlignIO_file_imports.json` which includes the import packages necessary to complete the parsing.
 
+## Loading the dataset
+The dataset is located in the `datasets` folder. Most of the following steps require the data to be structured as follows:
+```
+/data/Prompts/
+- [Prompt Type 1]
+  - [Prompt ID 1]
+  - [Prompt ID 2]
+  - ...
+  - [Prompt ID N]
+- [Prompt Type 2]
+    - [Prompt ID 1]
+    - [Prompt ID 2]
+    - ...
+    - [Prompt ID N]
+- ...
+```
+
+We have already parsed the public dataset in this format. Just extract it with 
+```bash
+unzip datasets/Prompts.zip -d data/
+```
+
 ## Inference
 This section consists of all files necessary to generate the outputs across different models.
 
 For convenience on running the script across multiple machines (output generation takes a long time, especially for these prompts), we have included a requirements.txt with the exact dependencies that we used.
-
-[//]: # (%     parser.add_argument&#40;"--firstrun", help="set to true if this is the first time you are running this script", action="store_true"&#41;)
-
-[//]: # (    # add all global variables as arguments)
-
-[//]: # (    parser.add_argument&#40;"--num_gpus", help="number of GPUs in cluster", type=int, default=num_gpus&#41;)
-
-[//]: # (    parser.add_argument&#40;"--gpus_per_process", help="number of GPUs per process", type=int, default=gpus_per_process&#41;)
-
-[//]: # (    parser.add_argument&#40;"--model_name_or_path", help="model name or path", type=str, default=model_name_or_path&#41;)
-
-[//]: # (    parser.add_argument&#40;"--generation_version", help="generation version", type=str, default=generation_version&#41;)
-
-[//]: # (    parser.add_argument&#40;"--max_length", help="max length", type=int, default=max_length&#41;)
-
-[//]: # (    parser.add_argument&#40;"--max_generation", help="max generation", type=int, default=max_generation&#41;)
-
-[//]: # (    parser.add_argument&#40;"--PROMPT_AMOUNT", help="prompt amount", type=int, default=PROMPT_AMOUNT&#41;)
-
-[//]: # (    parser.add_argument&#40;"--use_summary_only", help="use summary only", type=bool, default=use_summary_only&#41;)
-
-[//]: # (    parser.add_argument&#40;"--tolerance", help="tolerance", type=int, default=tolerance&#41;)
-
-[//]: # (    parser.add_argument&#40;"--discord_url", help="discord url", type=str, default=discord_url&#41;)
-
-[//]: # (    parser.add_argument&#40;"--base_folder_url", help="base folder url", type=str, default=base_folder_url&#41;)
-
-[//]: # (    parser.add_argument&#40;"--prompt_basefolder", help="prompt basefolder", type=str, default=prompt_basefolder&#41;)
-
-[//]: # (    args = parser.parse_args&#40;&#41;)
 
 The following arguments are available:
 
