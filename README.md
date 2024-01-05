@@ -210,7 +210,7 @@ print(pk_df['PassAt10'].mean())
 print(pk_df['PassAt20'].mean())
 ```
 
-## datasets
+## Datasets
 
 We provide our completed public dataset in this GitHub repository. It consists of the following files:
 
