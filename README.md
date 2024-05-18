@@ -226,9 +226,10 @@ We provide our completed public dataset in this GitHub repository. It consists o
 If you find our work useful in your research, please kindly consider cite:
 ```
 @article{tang2023biocoder,
-  title={BioCoder: A Benchmark for Bioinformatics Code Generation with Contextual Pragmatic Knowledge},
+  title={BioCoder: A Benchmark for Bioinformatics Code Generation with Large Language Models},
   author={Tang, Xiangru and Qian, Bill and Gao, Rick and Chen, Jiakang and Chen, Xinyun and Gerstein, Mark},
-  journal={arXiv preprint arXiv:2308.16458},
-  year={2023}
+  journal={Bioinformatics},
+  year={2024},
+  publisher={Oxford University Press}
 }
 ```
