@@ -583,8 +583,8 @@ try:
     # Format should be:
     # - app/
     #   - context.py
-    #   - generated_code.py
-    #   - golden_code.py
+    #   - generated.py
+    #   - golden.py
     function_data_url = f"{s3Url}/functions/{test_case_id[0]}/{test_case_id}.zip"
     print("Requesting function archive from: ", function_data_url)
     function_archive_req = requests.get(function_data_url)

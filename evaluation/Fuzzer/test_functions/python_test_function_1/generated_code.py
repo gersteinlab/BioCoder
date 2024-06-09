@@ -9,6 +9,6 @@ def most_common_character(str):
 
     # Return the most common character and its count
     if most_common:
-        return most_common[0][0], most_common[0][1]
+        return most_common[0][0]
     else:
         return None

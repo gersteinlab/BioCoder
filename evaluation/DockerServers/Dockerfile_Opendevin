@@ -1,0 +1,33 @@
+FROM ubuntu:focal
+ARG DEBIAN_FRONTEND=noninteractive
+RUN apt update && apt install -y openssh-server openssh-client openjdk-17-jdk bzip2 build-essential libncurses5-dev bzip2 build-essential libncurses5-dev libbz2-dev liblzma-dev python3-pip git wget sudo zip unzip curl
+RUN sudo mkdir /var/run/sshd
+RUN sudo echo 'root:test_password' | chpasswd
+RUN sudo sed -i 's/PermitRootLogin prohibit-password/PermitRootLogin yes/' /etc/ssh/sshd_config
+RUN sudo sed 's@session\s*required\s*pam_loginuid.so@session optional pam_loginuid.so@g' -i /etc/pam.d/sshd
+RUN sudo service ssh start
+#RUN sudo mkdir /var/run/sshd
+#RUN sudo chmod 0755 /var/run/sshd
+RUN useradd -ms /bin/bash devin
+
+# give ubuntu sudo access without password
+RUN echo "devin ALL=(ALL) NOPASSWD:ALL" >> /etc/sudoers
+RUN sudo usermod -a -G sudo devin
+USER devin
+WORKDIR /home/devin
+# Install adoptium jdk 17 
+RUN wget https://gersteincodegenprod.s3.amazonaws.com/binaries/adoptium17-jdk.tar.xz -O adoptium17-jdk.tar.xz && tar -xf adoptium17-jdk.tar.xz && rm adoptium17-jdk.tar.xz
+ENV JAVA_HOME=/home/devin/jdk-17.0.6+10/
+ENV PATH=$JAVA_HOME/bin:$PATH
+ENV PATH=/home/devin/mambaforge/bin:$PATH
+ENV ENV_NAME="base"
+RUN wget -O Mambaforge.sh "https://github.com/conda-forge/miniforge/releases/latest/download/Mambaforge-$(uname)-$(uname -m).sh"
+RUN bash Mambaforge.sh -b -p /home/devin/mambaforge
+RUN ~/mambaforge/condabin/conda init && ~/mambaforge/condabin/mamba init
+
+
+RUN pip3 install --upgrade pip
+RUN pip3 install bs4 requests pandas numpy scipy matplotlib seaborn tqdm boto3 pyyaml
+RUN echo "export PS1='\u:\W\$ '" >> /home/devin/.bashrc
+
+CMD ["/bin/bash"]

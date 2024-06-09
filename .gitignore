@@ -1,3 +1,6 @@
 .DS_Store
 
 .idea/
+
+evaluation/ImageBuilder/opendevin/sources/java
+evaluation/ImageBuilder/opendevin/testing_files
