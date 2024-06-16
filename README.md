@@ -2,6 +2,8 @@
 
 <p align="center"><a href="https://arxiv.org/abs/2308.16458">[📄 Paper]</a>
 <a href="https://biocoder-benchmark.github.io">[🌐 Website]</a>
+<a href="[https://biocoder-benchmark.github.io](https://huggingface.co/datasets/lilbillbiscuit/biocoder_public">[📜 Dataset]</a>
+
 
 BioCoder is a challenging bioinformatics code generation benchmark for examining the capabilities of state-of-the-art large language models (LLMs).
 
