@@ -225,11 +225,19 @@ We provide our completed public dataset in this GitHub repository. It consists o
 ## Citation
 If you find our work useful in your research, please kindly consider cite:
 ```
-@article{tang2023biocoder,
-  title={BioCoder: A Benchmark for Bioinformatics Code Generation with Large Language Models},
-  author={Tang, Xiangru and Qian, Bill and Gao, Rick and Chen, Jiakang and Chen, Xinyun and Gerstein, Mark},
-  journal={Bioinformatics},
-  year={2024},
-  publisher={Oxford University Press}
+@article{10.1093/bioinformatics/btae230,
+    author = {Tang, Xiangru and Qian, Bill and Gao, Rick and Chen, Jiakang and Chen, Xinyun and Gerstein, Mark B},
+    title = "{BioCoder: a benchmark for bioinformatics code generation with large language models}",
+    journal = {Bioinformatics},
+    volume = {40},
+    number = {Supplement_1},
+    pages = {i266-i276},
+    year = {2024},
+    month = {06},
+    abstract = "{Pretrained large language models (LLMs) have significantly improved code generation. As these models scale up, there is an increasing need for the output to handle more intricate tasks and to be appropriately specialized to particular domains. Here, we target bioinformatics due to the amount of domain knowledge, algorithms, and data operations this discipline requires. We present BioCoder, a benchmark developed to evaluate LLMs in generating bioinformatics-specific code. BioCoder spans much of the field, covering cross-file dependencies, class declarations, and global variables. It incorporates 1026 Python functions and 1243 Java methods extracted from GitHub, along with 253 examples from the Rosalind Project, all pertaining to bioinformatics. Using topic modeling, we show that the overall coverage of the included code is representative of the full spectrum of bioinformatics calculations. BioCoder incorporates a fuzz-testing framework for evaluation. We have applied it to evaluate various models including InCoder, CodeGen, CodeGen2, SantaCoder, StarCoder, StarCoder+, InstructCodeT5+, GPT-3.5, and GPT-4. Furthermore, we fine-tuned one model (StarCoder), demonstrating that our training dataset can enhance the performance on our testing benchmark (by \\&gt;15\\% in terms of Pass@K under certain prompt configurations and always \\&gt;3\\%). The results highlight two key aspects of successful models: (i) Successful models accommodate a long prompt (\\&gt;2600 tokens) with full context, including functional dependencies. (ii) They contain domain-specific knowledge of bioinformatics, beyond just general coding capability. This is evident from the performance gain of GPT-3.5/4 compared to the smaller models on our benchmark (50\\% versus up to 25\\%).All datasets, benchmark, Docker images, and scripts required for testing are available at: https://github.com/gersteinlab/biocoder and https://biocoder-benchmark.github.io/.}",
+    issn = {1367-4811},
+    doi = {10.1093/bioinformatics/btae230},
+    url = {https://doi.org/10.1093/bioinformatics/btae230},
+    eprint = {https://academic.oup.com/bioinformatics/article-pdf/40/Supplement\_1/i266/58354818/btae230.pdf},
 }
 ```
